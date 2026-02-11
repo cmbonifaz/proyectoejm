@@ -23,7 +23,7 @@ describe('Medicamentos API', () => {
             price: 5.50,
             quantity: 100,
             category: 'Analgésicos',
-            laboratory: 'Bayer'
+            laboratory: 'Bayer',
         };
 
         const res = await request(app).post('/api/medicamentos').send(newMedicamento);
@@ -49,7 +49,7 @@ describe('Medicamentos API', () => {
             price: 3.50,
             quantity: 50,
             category: 'Antiinflamatorios',
-            laboratory: 'Bayer'
+            laboratory: 'Bayer',
         };
 
         const aspirina = await request(app).post('/api/medicamentos').send(medicamento);
@@ -71,7 +71,7 @@ describe('Medicamentos API', () => {
             price: 6.00,
             quantity: 80,
             category: 'Antiinflamatorios',
-            laboratory: 'Pfizer'
+            laboratory: 'Pfizer',
         };
 
         const ibuprofeno = await request(app).post('/api/medicamentos').send(medicamento);
@@ -82,7 +82,7 @@ describe('Medicamentos API', () => {
             .send({
                 name: 'Ibuprofeno 400mg',
                 description: 'Antiinflamatorio y analgésico',
-                quantity: 100
+                quantity: 100,
             });
 
         expect(updated.statusCode).toBe(200);
@@ -100,7 +100,7 @@ describe('Medicamentos API', () => {
             price: 8.50,
             quantity: 30,
             category: 'Antibióticos',
-            laboratory: 'Pfizer'
+            laboratory: 'Pfizer',
         };
 
         const amoxicilina = await request(app).post('/api/medicamentos').send(medicamento);

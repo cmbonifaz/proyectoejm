@@ -22,7 +22,7 @@ describe('Pacientes API', () => {
             lastName: 'Perez',
             email: 'juanperez@example.com',
             gender: 'Masculino',
-            illness: 'Gripe'
+            illness: 'Gripe',
         };
 
         const res = await request(app).post('/api/pacientes').send(newPatient);
@@ -47,7 +47,7 @@ describe('Pacientes API', () => {
             lastName: 'Lopez',
             email: 'analopez@example.com',
             gender: 'Femenino',
-            illness: 'Fiebre'
+            illness: 'Fiebre',
         };
 
         const anaLopez = await request(app).post('/api/pacientes').send(patient);
@@ -68,7 +68,7 @@ describe('Pacientes API', () => {
             lastName: 'Garcia',
             email: 'pedro@example.com',
             gender: 'Masculino',
-            illness: 'Diabetes'
+            illness: 'Diabetes',
         };
 
         const pedroGarcia = await request(app).post('/api/pacientes').send(patient);
@@ -79,7 +79,7 @@ describe('Pacientes API', () => {
             .send({
                 name: 'Pedro Luis',
                 lastName: 'Garcia Perez',
-                email: 'pedroluis@example.com'
+                email: 'pedroluis@example.com',
             });
 
         expect(updated.statusCode).toBe(200);
@@ -96,7 +96,7 @@ describe('Pacientes API', () => {
             lastName: 'Perez',
             email: 'carlosperez@example.com',
             gender: 'Masculino',
-            illness: 'Alergia'
+            illness: 'Alergia',
         };
 
         const carlosPerez = await request(app).post('/api/pacientes').send(patient);

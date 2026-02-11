@@ -23,7 +23,7 @@ describe('Doctors API', () => {
             specialty: 'Cardiología',
             phone: '0987654321',
             email: 'carlos.ramirez@hospital.com',
-            licenseNumber: 'LIC-12345'
+            licenseNumber: 'LIC-12345',
         };
 
         const response = await request(app)
@@ -42,7 +42,7 @@ describe('Doctors API', () => {
     test('POST /api/doctores - should return 400 error if fields are missing', async () => {
         const incompleteDoctor = {
             name: 'Maria',
-            lastName: 'Gonzalez'
+            lastName: 'Gonzalez',
             // Missing: specialty, phone, email, licenseNumber
         };
 
@@ -63,7 +63,7 @@ describe('Doctors API', () => {
             specialty: 'Cardiología',
             phone: '0987654321',
             email: 'carlos.ramirez@hospital.com',
-            licenseNumber: 'LIC-12345'
+            licenseNumber: 'LIC-12345',
         });
 
         const duplicateDoctor = {
@@ -72,7 +72,7 @@ describe('Doctors API', () => {
             specialty: 'Pediatría',
             phone: '0998765432',
             email: 'pedro.sanchez@hospital.com',
-            licenseNumber: 'LIC-12345' // Same license number
+            licenseNumber: 'LIC-12345', // Same license number
         };
 
         const response = await request(app)
@@ -90,7 +90,7 @@ describe('Doctors API', () => {
             specialty: 'Cardiology',
             phone: '1234567890',
             email: 'john@example.com',
-            licenseNumber: 'LIC-001'
+            licenseNumber: 'LIC-001',
         });
 
         const doctor2 = await request(app).post('/api/doctores').send({
@@ -99,7 +99,7 @@ describe('Doctors API', () => {
             specialty: 'Neurology',
             phone: '0987654321',
             email: 'jane@example.com',
-            licenseNumber: 'LIC-002'
+            licenseNumber: 'LIC-002',
         });
 
         const res = await request(app)
@@ -117,14 +117,14 @@ describe('Doctors API', () => {
             specialty: 'Cardiology',
             phone: '1234567890',
             email: 'john@example.com',
-            licenseNumber: 'LIC-00001'
+            licenseNumber: 'LIC-00001',
         });
 
         const res = await request(app)
             .put(`/api/doctores/${doctor.body._id}`)
             .send({
                 name: 'John Updated',
-                licenseNumber: 'LIC-00001'
+                licenseNumber: 'LIC-00001',
             });
 
         expect(res.statusCode).toBe(200);
@@ -141,7 +141,7 @@ describe('Doctors API', () => {
             specialty: 'General',
             phone: '1234567890',
             email: 'test@example.com',
-            licenseNumber: 'LIC-TEST'
+            licenseNumber: 'LIC-TEST',
         });
 
         const response = await request(app).get('/api/doctores');
@@ -159,12 +159,12 @@ describe('Doctors API', () => {
             specialty: 'Cardiología',
             phone: '0987654321',
             email: 'carlos.ramirez@hospital.com',
-            licenseNumber: 'LIC-UPDATE-TEST'
+            licenseNumber: 'LIC-UPDATE-TEST',
         });
 
         const updatedData = {
             specialty: 'Neurocirugía',
-            phone: '0912345678'
+            phone: '0912345678',
         };
 
         const response = await request(app)
@@ -186,7 +186,7 @@ describe('Doctors API', () => {
             specialty: 'Test',
             phone: '1111111111',
             email: 'delete@example.com',
-            licenseNumber: 'LIC-DELETE-TEST'
+            licenseNumber: 'LIC-DELETE-TEST',
         });
 
         const response = await request(app).delete(`/api/doctores/${doctor.body._id}`);

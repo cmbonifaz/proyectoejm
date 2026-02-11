@@ -8,7 +8,8 @@
         "test": "jest",
         "test:watch": "jest --watch",
         "test:coverage": "jest --coverage",
-        "test:api": "node test_api.js"
+        "test:api": "node test_api.js",
+        "lint": "eslint ."
     },
     "keywords": [
         "hospital",
@@ -27,6 +28,7 @@
         "mongoose": "^9.0.2"
     },
     "devDependencies": {
+        "eslint": "^10.0.0",
         "jest": "^29.7.0",
         "supertest": "^6.3.3"
     }

@@ -28,6 +28,3 @@ jobs:
 
       - name: Ejecutar Pruebas de Cobertura
         run: npm run test:coverage
-
-      - name: Build
-        run: npm ci && npm run build

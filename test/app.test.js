@@ -54,7 +54,7 @@ describe('App API - Main Endpoints', () => {
             lastName: 'User',
             email: 'test@example.com',
             gender: 'Masculino',
-            illness: 'Test'
+            illness: 'Test',
         };
 
         const res = await request(app).post('/api/pacientes').send(newPatient);
@@ -117,7 +117,7 @@ describe('App API - Main Endpoints', () => {
             price: 10.50,
             quantity: 100,
             category: 'Test',
-            laboratory: 'Test Lab'
+            laboratory: 'Test Lab',
         };
 
         const res = await request(app).post('/api/medicamentos').send(newMed);
@@ -142,7 +142,7 @@ describe('App API - Main Endpoints', () => {
             specialty: 'Test Spec',
             phone: '1234567890',
             email: 'test@doctor.com',
-            licenseNumber: 'TEST-123'
+            licenseNumber: 'TEST-123',
         };
 
         const res = await request(app).post('/api/doctores').send(newDoc);

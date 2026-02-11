@@ -144,7 +144,7 @@ async function handleDoctorSubmit(e) {
         specialty: document.getElementById('doctorSpecialty').value,
         phone: document.getElementById('doctorPhone').value,
         email: document.getElementById('doctorEmail').value,
-        licenseNumber: document.getElementById('doctorLicense').value
+        licenseNumber: document.getElementById('doctorLicense').value,
     };
 
     const id = document.getElementById('doctorId').value;
@@ -156,7 +156,7 @@ async function handleDoctorSubmit(e) {
         const response = await fetch(url, {
             method: method,
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(doctor)
+            body: JSON.stringify(doctor),
         });
 
         if (response.ok) {
@@ -190,7 +190,7 @@ async function deleteDoctor(id) {
 
     try {
         const response = await fetch(`${API_URL}/doctores/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
         });
 
         if (response.ok) {
@@ -257,7 +257,7 @@ async function handlePatientSubmit(e) {
         lastName: document.getElementById('patientLastName').value,
         email: document.getElementById('patientEmail').value,
         gender: document.getElementById('patientGender').value,
-        illness: document.getElementById('patientIllness').value
+        illness: document.getElementById('patientIllness').value,
     };
 
     const id = document.getElementById('patientId').value;
@@ -269,7 +269,7 @@ async function handlePatientSubmit(e) {
         const response = await fetch(url, {
             method: method,
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(patient)
+            body: JSON.stringify(patient),
         });
 
         if (response.ok) {
@@ -302,7 +302,7 @@ async function deletePatient(id) {
 
     try {
         const response = await fetch(`${API_URL}/pacientes/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
         });
 
         if (response.ok) {
@@ -372,7 +372,7 @@ async function handleMedicineSubmit(e) {
         price: parseFloat(document.getElementById('medicinePrice').value),
         quantity: parseInt(document.getElementById('medicineQuantity').value),
         category: document.getElementById('medicineCategory').value,
-        laboratory: document.getElementById('medicineLaboratory').value
+        laboratory: document.getElementById('medicineLaboratory').value,
     };
 
     const id = document.getElementById('medicineId').value;
@@ -384,7 +384,7 @@ async function handleMedicineSubmit(e) {
         const response = await fetch(url, {
             method: method,
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(medicine)
+            body: JSON.stringify(medicine),
         });
 
         if (response.ok) {
@@ -418,7 +418,7 @@ async function deleteMedicine(id) {
 
     try {
         const response = await fetch(`${API_URL}/medicamentos/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
         });
 
         if (response.ok) {
@@ -476,7 +476,7 @@ async function handleSpecialtySubmit(e) {
     e.preventDefault();
 
     const specialty = {
-        name: document.getElementById('specialtyName').value
+        name: document.getElementById('specialtyName').value,
     };
 
     const id = document.getElementById('specialtyId').value;
@@ -488,7 +488,7 @@ async function handleSpecialtySubmit(e) {
         const response = await fetch(url, {
             method: method,
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(specialty)
+            body: JSON.stringify(specialty),
         });
 
         if (response.ok) {
@@ -519,7 +519,7 @@ async function deleteSpecialty(id) {
 
     try {
         const response = await fetch(`${API_URL}/especialidades/${id}`, {
-            method: 'DELETE'
+            method: 'DELETE',
         });
 
         if (response.ok) {
