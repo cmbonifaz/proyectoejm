@@ -5,9 +5,9 @@
     "main": "src/server.js",
     "scripts": {
         "start": "node src/server.js",
-        "test": "jest",
+        "test": "jest --runInBand",
         "test:watch": "jest --watch",
-        "test:coverage": "jest --coverage",
+        "test:coverage": "jest --coverage --runInBand",
         "test:api": "node test_api.js",
         "lint": "eslint ."
     },

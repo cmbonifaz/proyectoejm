@@ -47,6 +47,12 @@ async function addNewDoctor(req, res) {
         // Respond with created doctor
         res.status(201).json(newDoctor);
     } catch (error) {
+        // Handle MongoDB duplicate key error (E11000)
+        if (error.code === 11000) {
+            return res.status(409).json({
+                message: 'A doctor with this license number already exists',
+            });
+        }
         res.status(500).json({ message: 'Error creating doctor', error: error.message });
     }
 }
@@ -63,7 +69,7 @@ async function updateDoctor(req, res) {
         }
 
         // If attempting to update license number, verify it doesn't exist in another doctor
-        if (licenseNumber && licenseNumber !== doctor.licenseNumber) {
+        if (licenseNumber !== undefined && licenseNumber !== doctor.licenseNumber) {
             const existingDoctor = await Doctor.findOne({ licenseNumber, _id: { $ne: id } });
             if (existingDoctor) {
                 return res.status(409).json({
@@ -73,16 +79,22 @@ async function updateDoctor(req, res) {
         }
 
         // Update fields
-        if (name) doctor.name = name;
-        if (lastName) doctor.lastName = lastName;
-        if (specialty) doctor.specialty = specialty;
-        if (phone) doctor.phone = phone;
-        if (email) doctor.email = email;
-        if (licenseNumber) doctor.licenseNumber = licenseNumber;
+        if (name !== undefined) doctor.name = name;
+        if (lastName !== undefined) doctor.lastName = lastName;
+        if (specialty !== undefined) doctor.specialty = specialty;
+        if (phone !== undefined) doctor.phone = phone;
+        if (email !== undefined) doctor.email = email;
+        if (licenseNumber !== undefined) doctor.licenseNumber = licenseNumber;
 
         await doctor.save();
         res.json(doctor);
     } catch (error) {
+        // Handle MongoDB duplicate key error (E11000)
+        if (error.code === 11000) {
+            return res.status(409).json({
+                message: 'A doctor with this license number already exists',
+            });
+        }
         res.status(500).json({ message: 'Error updating doctor', error: error.message });
     }
 }

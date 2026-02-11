@@ -4,6 +4,7 @@ const Paciente = require('../src/models/Paciente');
 const Doctor = require('../src/models/Doctor');
 const Especialidad = require('../src/models/Especialidad');
 const Medicamento = require('../src/models/Medicamento');
+const mongoose = require('mongoose');
 
 describe('App API - Main Endpoints', () => {
 
@@ -13,6 +14,11 @@ describe('App API - Main Endpoints', () => {
         await Doctor.deleteMany({});
         await Especialidad.deleteMany({});
         await Medicamento.deleteMany({});
+    });
+
+    // Close database connection after all tests
+    afterAll(async () => {
+        await mongoose.connection.close();
     });
 
     // Test CORS middleware

@@ -1,11 +1,17 @@
 const request = require('supertest');
 const app = require('../src/app.js');
 const Especialidad = require('../src/models/Especialidad');
+const mongoose = require('mongoose');
 
 describe('Especialidades API', () => {
     // Clear database before each test
     beforeEach(async () => {
         await Especialidad.deleteMany({});
+    });
+
+    // Close database connection after all tests
+    afterAll(async () => {
+        await mongoose.connection.close();
     });
 
     // GET

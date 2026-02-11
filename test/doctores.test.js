@@ -1,11 +1,17 @@
 const request = require('supertest');
 const app = require('../src/app');
 const Doctor = require('../src/models/Doctor');
+const mongoose = require('mongoose');
 
 describe('Doctors API', () => {
     // Clear database before each test
     beforeEach(async () => {
         await Doctor.deleteMany({});
+    });
+
+    // Close database connection after all tests
+    afterAll(async () => {
+        await mongoose.connection.close();
     });
 
     // Test GET - list doctors (initially empty)

@@ -1,11 +1,17 @@
 const request = require('supertest');
 const app = require('../src/app.js');
 const Paciente = require('../src/models/Paciente');
+const mongoose = require('mongoose');
 
 describe('Pacientes API', () => {
     // Clear database before each test
     beforeEach(async () => {
         await Paciente.deleteMany({});
+    });
+
+    // Close database connection after all tests
+    afterAll(async () => {
+        await mongoose.connection.close();
     });
 
     // GET
