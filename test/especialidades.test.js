@@ -1,0 +1,97 @@
+const request = require('supertest');
+const app = require('../src/app.js');
+const Especialidad = require('../src/models/Especialidad');
+
+describe('Especialidades API', () => {
+    // Clear database before each test
+    beforeEach(async () => {
+        await Especialidad.deleteMany({});
+    });
+
+    // GET
+    test('GET /api/especialidades should return an empty list initially', async () => {
+        const res = await request(app).get('/api/especialidades');
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toEqual([]);  // Vacía al inicio
+    });
+
+    // POST
+    test('POST /api/especialidades should create a new specialty', async () => {
+        const newSpecialty = { name: 'Medicina General' };
+
+        const res = await request(app).post('/api/especialidades').send(newSpecialty);
+
+        expect(res.statusCode).toBe(201);
+        expect(res.body).toHaveProperty('_id');
+        expect(res.body.name).toBe('Medicina General');
+    });
+
+    // POST invalid data
+    test('POST /api/especialidades should reject invalid data', async () => {
+        const res = await request(app).post('/api/especialidades').send({});
+        expect(res.statusCode).toBe(400);
+        expect(res.body).toHaveProperty('message', 'Specialty name is required');
+    });
+
+    test('should reject duplicate specialty', async () => {
+        await request(app).post('/api/especialidades').send({ name: 'Cardiology' });
+
+        const res = await request(app).post('/api/especialidades').send({ name: 'cardiology' });
+
+        expect(res.statusCode).toBe(409);
+        expect(res.body).toHaveProperty('message', 'Specialty already exists');
+    });
+
+    // PUT
+    test('PUT /api/especialidades/:id should update an existing specialty', async () => {
+        const specialty = { name: 'Oftalmología' };
+        const created = await request(app).post('/api/especialidades').send(specialty);
+        const id = created.body._id;
+
+        const updated = await request(app)
+            .put(`/api/especialidades/${id}`)
+            .send({ name: 'Oftalmología Corregida' });
+
+        expect(updated.statusCode).toBe(200);
+        expect(updated.body.name).toBe('Oftalmología Corregida');
+    });
+
+    // PUT: Especialidad no encontrada
+    test('PUT /api/especialidades/:id should return 404 if specialty not found', async () => {
+        const res = await request(app)
+            .put('/api/especialidades/507f1f77bcf86cd799439011')
+            .send({ name: 'Dermatología' });
+
+        expect(res.statusCode).toBe(404);
+        expect(res.body).toHaveProperty('message', 'Specialty not found');
+    });
+
+    // DELETE
+    test('DELETE /api/especialidades/:id should delete a specialty', async () => {
+        const specialty = { name: 'Cardiología' };
+        const created = await request(app).post('/api/especialidades').send(specialty);
+        const id = created.body._id;
+
+        const deleted = await request(app).delete(`/api/especialidades/${id}`);
+        expect(deleted.statusCode).toBe(200);
+        expect(deleted.body.name).toBe('Cardiología');
+
+        const res = await request(app).get('/api/especialidades');
+        expect(res.body.find(e => e._id === id)).toBeUndefined();
+    });
+
+    // DELETE: Especialidad no encontrada
+    test('DELETE /api/especialidades/:id should return 404 if specialty not found', async () => {
+        const res = await request(app).delete('/api/especialidades/507f1f77bcf86cd799439011');
+
+        expect(res.statusCode).toBe(404);
+        expect(res.body).toHaveProperty('message', 'Specialty not found');
+    });
+
+    // 404 
+    test('GET /ruta-inexistente - should return 404 for non-existent routes', async () => {
+        const res = await request(app).get('/ruta-inexistente');
+        expect(res.statusCode).toBe(404);
+        expect(res.body).toHaveProperty('message', 'Route not found');
+    });
+});

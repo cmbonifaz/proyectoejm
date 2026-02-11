@@ -1,0 +1,33 @@
+{
+    "name": "hospital-api-backend",
+    "version": "1.0.0",
+    "description": "Hospital Management API with unit testing",
+    "main": "src/server.js",
+    "scripts": {
+        "start": "node src/server.js",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:coverage": "jest --coverage",
+        "test:api": "node test_api.js"
+    },
+    "keywords": [
+        "hospital",
+        "api",
+        "testing",
+        "express"
+    ],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcryptjs": "^3.0.3",
+        "cors": "^2.8.5",
+        "dotenv": "^17.2.3",
+        "express": "^4.18.2",
+        "jsonwebtoken": "^9.0.3",
+        "mongoose": "^9.0.2"
+    },
+    "devDependencies": {
+        "jest": "^29.7.0",
+        "supertest": "^6.3.3"
+    }
+}
